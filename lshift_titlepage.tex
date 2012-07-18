@@ -32,27 +32,7 @@
     No 04040033}
 \end{textblock}
 
-\newcolumntype{K}{>{\columncolor{LShiftBlue}}c}
-\vspace*{10cm}
-{\flushleft
-  \textcolor{LShiftBlue}{\bf\begin{Huge}\tystrtitle\\\end{Huge}}
-  \vspace*{0.4cm}
-  \textcolor{SubtitleGrey}{\begin{large}\tystrsubtitle\end{large}}
-}
-\vspace*{0.4cm}
-{\small
-  \begin{description}[font=\normalfont,align=right]
-  \whendefined{\tystrclient}{\item[Prepared for] {\bf\tystrclient}}
-  \whendefined{\tystrrecipients}{\item[Recipient(s)] {\bf\tystrrecipients}}
-  \whendefined{\tystrproject}{\item[Project] {\bf\tystrproject}}
-  \whendefined{\tystrversion}{\item[Version] {\bf\tystrversion}}
-  \whendefined{\tystrdate}{\item[Date] {\bf\tystrdate}}
-  \whendefined{\tystrauthor}{\item[Author(s)] {\bf\tystrauthor}}
-  %empty item in case none are defined
-  \item[]{}
-  \end{description}
 
-}
 
 % Small logo
 \begin{textblock}{1}(150,15)
@@ -60,19 +40,14 @@
 \end{textblock}
 
 % This is just put it to force a page break to the following page.
-\newpage
+
 \rfoot{}
 \rhead{
   \begin{textblock}{100}(105,15)
   \small
-  \tystrtitle\\
-  \whendefined{\tystrversion}{Version \tystrversion\\}
-  \confidentialmark
   \end{textblock}
 }
 
-\tableofcontents
 % newpage
-\newpage
 % start printining page no.
 \rfoot{\textcolor{LShiftBlue}{Page\ \thepage\ of \pageref*{LastPage}\\}}
