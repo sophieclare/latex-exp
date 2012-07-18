@@ -1,0 +1,900 @@
+% -*- TeX-engine: xetex -*-
+\documentclass[a4paper, 11pt]{scrreprt}
+
+% Include the standard LShift package
+\usepackage{lshift}
+%---------------------------------------------------------------------------
+% TOCs, Indexes, Nomenclature
+\usepackage[intoc]{nomencl}
+\makenomenclature
+\usepackage{makeidx}
+\makeindex
+
+%---------------------------------------------------------------------------
+% Renders definitions, examples and design considerations differently
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{design}[1][Design Consideration]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+%---------------------------------------------------------------------------
+% Kick the document off
+\begin{document}
+% Variables for the title page
+\newcommand{\tystrsubtitle}{}
+\newcommand{\tystrtitle}{Untitled Document}
+\newcommand{\tystrauthor}{LShift}
+\newcommand{\tystrclient}{LShift}
+\newcommand{\tystrproject}{internal}
+\newcommand{\tystraffiliation}{LShift blah blah}
+\newcommand{\tystrversion}{0.0}
+\newcommand{\tystrdate}{2012-07-12}
+\include{lshift_titlepage}
+% Main body
+
+\section{ Typesetr Prototype letter}
+\label{h.v0in2tf244c4}
+
+\subsection{System Overview}
+\label{h.aqxdte3o5oy}
+The architectural overview in the RFP document represents a useful decomposition of the system which we shall use to structure the subsequent Requirements and Proposed Solution sections.
+
+%\tystrblockfigurenocap{Pictures/image1.png}
+\subsection{Key Technical Challenges}
+\label{h.pz4ldwvctu7q}
+Pulling together so many types and sources of information into the page creates complexity and requires careful optimisation. As a result there are a number of particularly acute technical challenges upon which we will be focusing.
+
+
+
+\begin{tystrul}
+
+
+\item Javascript memory management - ...
+
+\item Video/audio performance - ...
+
+\item Caching and data retrieval optimisation - ...
+
+\item ...
+
+\end{tystrul}
+
+(LEE: I think I’ve covered the above in the sections below)
+
+
+\subsection{Requirements}
+\label{h.wzni16acjdug}
+
+\subsubsection{Listener UI}
+\label{h.ytaf9vwy4xeh}
+
+\subsubsection{Site Structure}
+\label{h.r6ulgjtmbi2l}
+
+\subsubsection{The Radio 1 / 1Xtra home page is a single page that uses dynamically updated content areas and tabs to make a lot of the content on the current web sites available to Listeners in an intuitive, dynamic and exciting way.}
+\label{h.v35p0vz1wg6y}
+The page will consist of:
+
+
+
+\begin{tystrul}
+
+
+\item BBC ID controls
+
+\item QuickFind control
+
+\item Now Playing component
+
+\item Network preview and switcher
+
+\item Promotional Area
+
+\item Suggestion Area
+
+\item Studio messaging component
+
+\item Tabs for:
+
+\begin{tystrul}
+
+
+\item Live Feed
+
+\item DJ / Brands
+
+\item Music
+
+\item News
+
+\item Charts
+
+\item Playlists
+
+\end{tystrul}
+
+
+
+\end{tystrul}
+
+The majority of this content is well covered in the supplied UX Wireframes. However, the DJ / Brands, Music, News, Charts and Playlists Tabs are either very lightly defined, or not defined at all. For these components we have had to put in a very rough estimate which will need to be validated during the Foundations phase.
+
+
+\subsubsection{Objects}
+\label{h.nkw15bbh3elf}
+The Live Feed, and Promotional and Suggestion Areas are interactive grids that display a range of content Objects, as per the RFP Scope document. The data will be delivered in one of two ways:
+
+
+
+\begin{tystrul}
+
+
+\item Flash / Javascript enabled browsers; content will be delivered via XMPP utilizing a BBC supplied headless Flash XMPP client that can interact with Javascript. Based on the Object and meta-data received, the content will be added to the appropriate area in real-time without a browser refresh.
+
+\item Other browsers; the areas will be rendered statically by the PAL which means that a browser refresh will be needed to update them. This can be done using a refresh header if desired so the page or frame will automatically be refreshed every minute.	
+
+\end{tystrul}
+
+
+\subsubsection{Design}
+\label{h.q9yn9z4wxpq9}
+The Listener UI design will be supplied by the BBC. LShift will do the necessary preparation and HTML assembly to render the pages, in regular consultation with a BBC Creative Director and design team.
+
+
+\subsubsection{Accessiblity}
+\label{h.axz0q8rg5jok}
+The site will be designed using a progressive enhancement approach that emphasizes accessibility. As discussed above, the site will be able to be rendered statically in the PAL so that Listeners without Javascript browsers, or those using screen readers, can access the content without compromising the interactive real-time experience for browsers that can support it.
+
+The delivered site will be fully compliant with the appropriate BBC Standards.
+
+
+\subsection{Service Layer}
+\label{h.6l6n7ooy4jkq}
+
+\subsubsection{Feeds}
+\label{h.in788vjoh5u8}
+Existing feeds provide the seed data for several types of content Object to be displayed on the site. They will be polled on a predetermined schedule, and all the candidate Objects created and inserted into the Object Repository. Some Objects will be automatically inserted into the Live Feed when they are detected, or at the appropriate time, e.g., Episodes will be inserted at the Episode start time. Objects automatically inserted into the Live Feed will still be available to Producers for inserting into the Promotions feed.
+
+The following feeds and Objects are expected for launch. 
+
+
+
+\begin{tystrul}
+
+
+\item /programmes
+
+\begin{tystrul}
+
+
+\item Episode
+
+\item Video
+
+\item Audio (clip)
+
+\item Audio (chapter)
+
+\end{tystrul}
+
+
+
+\item ION Stream
+
+\begin{tystrul}
+
+
+\item Video
+
+\item Audio (clip)
+
+\item Audio (chapter)
+
+\end{tystrul}
+
+
+
+\item WIN Console
+
+\begin{tystrul}
+
+
+\item SMS
+
+\item MMS
+
+\item User message
+
+\item Studio message
+
+\end{tystrul}
+
+
+
+\item Realtime Tool
+
+\begin{tystrul}
+
+
+\item Network message
+
+\end{tystrul}
+
+
+
+\item News CPS
+
+\begin{tystrul}
+
+
+\item Newsbeat story
+
+\end{tystrul}
+
+
+
+\item RSS
+
+\begin{tystrul}
+
+
+\item Blogs
+
+\item Facebook status updates
+
+\item Twitter Tweets
+
+\end{tystrul}
+
+
+
+\item Photo Gallery
+
+\begin{tystrul}
+
+
+\item Gallery
+
+\end{tystrul}
+
+
+
+\end{tystrul}
+
+There are other means of getting Facebook updates and Tweets other than RSS, but based on our understanding, we feel that the RSS feeds are sufficient for this project, and provide a more generic and therefore more cost effective approach. This will obviously require the relevant Facebook status pages to be public.
+
+
+\subsubsection{Admin UI}
+\label{h.nnvomw29p7ay}
+
+\paragraph{Object Searching, Creation and Editing}
+\label{h.ofd8cd43w7p0}
+Producers will be able to search for Objects in the repository using a combination of network, brand, Object type, date range, state (on Live / Promotional Feed, scheduled, revoked, suggested) and free text search of the content itself. Clicking through the selected result will show a preview of the three different sized representations of the Object.
+
+Producers will be able to edit the Objects, including the publishing options, and also create new Objects that can be populated by hand. However, in order to keep the homepage feeling ‘live’ and to achieve the real-time aspirations of the project, there must be a quick and easy method for producers to manually add content. This will be achieved using bookmarklets as per the demo presented by the BBC.
+
+The bookmarklets sub-system will have a modular design to allow support for new sources to be added over time. For launch, the following sources will be supported:
+
+
+
+\begin{tystrul}
+
+
+\item Image on BBC page, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Fwww.bbc.co.uk%2Fradio1%2Fphotos%2Fchrismoyles%2F5532%2F12&sa=D&sntz=1&usg=AFQjCNHn9WqOWgalTpkeue8WHCbTMrsyGA}{ http://www.bbc.co.uk/radio1/photos/chrismoyles/5532/12}
+
+\item Image on Flickr page, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fradio1interactive%2F4633052347%2F&sa=D&sntz=1&usg=AFQjCNEIi1bYKbl7wETgg-zPbiwvpdLD4Q}{ http://www.flickr.com/photos/radio1interactive/4633052347/}
+
+\item Image on any page at all. In this case, a list of available images will be presented to the producer to choose from. Note that rights management must be handled outside of this system.
+
+\item Webcam image, e.g., from\href{http://www.google.com/url?q=http%3A%2F%2Fwww.bbc.co.uk%2Fradio1%2Fwebcam%2F&sa=D&sntz=1&usg=AFQjCNGI2M_3lazHiE59sQ_Pz6mPrwceMg}{ http://www.bbc.co.uk/radio1/webcam/}. The still image will be captured as stored as per Image Objects (see below)
+
+\item Gallery on BBC page, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Fwww.bbc.co.uk%2Fradio1%2Fphotos%2Fchrismoyles%2F5532&sa=D&sntz=1&usg=AFQjCNGzVw031QNob9HFXZrdARKtsxA4pQ}{ http://www.bbc.co.uk/radio1/photos/chrismoyles/5532}
+
+\item Video from /programmes, e.g., http://www.bbc.co.uk/programmes/p009sj4f
+
+\item Audio clips from /programmes, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Fwww.bbc.co.uk%2Fprogrammes%2Fb00tpplr&sa=D&sntz=1&usg=AFQjCNECYI7w6bja_WDIT6ReGDaifkmNGA}{ http://www.bbc.co.uk/programmes/b00tpplr}
+
+\item Audio chapters from /programmes, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Fwww.bbc.co.uk%2Fprogrammes%2Fb00tpplr%23p00b3jqt&sa=D&sntz=1&usg=AFQjCNHlgFkSx8QRxDV1rZy7o8bYYvBzEA}{ http://www.bbc.co.uk/programmes/b00tpplr\#p00b3jqt}
+
+\item Blog post from /blogs, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Fwww.bbc.co.uk%2Fblogs%2Fchrismoyles%2F2010%2F09%2Fthe_weekend_is_here_deal_with.html&sa=D&sntz=1&usg=AFQjCNEkw9ICNcJJKKIt09afTCHE4fueBA}{ http://www.bbc.co.uk/blogs/chrismoyles/2010/09/the\_weekend\_is\_here\_deal\_with.html}
+
+\item Track from /music, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Fwww.bbc.co.uk%2Fmusic%2Fartists%2F8b6f809d-a078-4042-81aa-659c79c8f4c2&sa=D&sntz=1&usg=AFQjCNGNSuAetrJxBj_P8KV72ev4D-4qzQ}{ http://www.bbc.co.uk/music/artists/8b6f809d-a078-4042-81aa-659c79c8f4c2}
+
+\item Tweet from Twitter, e.g.,\href{http://www.google.com/url?q=http%3A%2F%2Ftwitter.com%2FABCQuinn%2Fstatus%2F24678480034&sa=D&sntz=1&usg=AFQjCNFZrjtDb8Ftc1_mPmyG-wp6JZygDw}{ http://twitter.com/ABCQuinn/status/24678480034}
+
+\item Facebook status, e.g., from http://www.facebook.com/bbcradio1
+
+\item Newsbeat story, e.g., from http://www.bbc.co.uk/newsbeat/11329643
+
+\end{tystrul}
+
+When a page is submitted using the bookmarklet, the system will determine as much meta-data as possible, which can then be extended or overridden by the Producer. They can also change the network, inject the Object directly into the Live Feed, schedule it for the Promotion / Promotion Hero Feed, revoke a published Object, or mark the Object as suggested content for inclusion on the Home Page. 
+
+The system will try and reduce duplicates by checking to see if an Object already exists. The Producer can still create a new object to support cases where there may be content changes or multiple schedules.
+
+All changes to Objects will be kept in an audit log which will also be viewable via the UI.
+
+Note that for bookmarklets to work, the Service layer must be able to make HTTP calls to the source sites.
+
+
+\subparagraph{Optional}
+\label{h.j2a62rbkm76w}
+It may be possible to enhance the Producers search results by using WebSockets to display a real-time updated feed of matched Objects in the Producer’s browser automatically. We have not costed this option as we feel it is a ‘nice to have’ requirement, and it would involve heavy cooperation with the Operations team to make sure it works through the various firewalls and proxies in the Forge architecture. However, if this option is desired, LShift would love to discuss what might be involved in implementing it!
+
+
+\paragraph{Feeds Configuration}
+The system will need to know which feeds are available for which networks and brands, and also which ones should trigger the automatic insertion of Objects into the Live Stream at any given time. For most feeds, this will be done using a static configuration file that can only be updated by redeploying. However, some feeds should be configured by Producers so that they can change more frequently. These are:
+
+
+
+\begin{tystrul}
+
+
+\item WIN Console
+
+\begin{tystrul}
+
+
+\item SMS
+
+\item MMS
+
+\end{tystrul}
+
+
+
+\item RSS Feeds
+
+\begin{tystrul}
+
+
+\item Blogs
+
+\item Twitter
+
+\item Facebook Updates
+
+\item Others as desired
+
+\end{tystrul}
+
+
+
+\end{tystrul}
+
+
+\paragraph{Homepage Management}
+The following functionality will be provided to producers:
+
+
+
+\begin{tystrul}
+
+
+\item Replace homepage with obituary page
+
+\item Turn live video stream on or off
+
+\item Indicate a presenter has been deputised for any given episode
+
+\end{tystrul}
+
+
+\subsection{Proposed Solution}
+\label{h.4iv9vixt6t4x}
+
+\subsubsection{Architecture}
+\label{h.hoq2qgo5lxdl}
+The application will be built on the BBC Platform (aka Forge), and will consist of elements in the Browser as well as the Service Layer and PAL.
+
+
+\paragraph{Browser}
+\label{h.hyot1o6ssi8z}
+\tystrblockfigurenocap{lshift-logo-grey-corner}The diagram above shows the interactions for an XMPP / Javascript Browser. The JS Engine can:
+
+
+
+\begin{tystrul}
+
+
+\item add Objects to the DOM as they come into the XMPP client
+
+\item query R1 Web Services via AJAX (using JSON rather than XML) for data to enrich the Objects with, such as the R1 HomeService, Love Engine and the Chart Publisher. It is likely that this will via the Open gateway.
+
+\end{tystrul}
+
+Ideally, the XMPP service will be configured to allow persistent items, and keep sufficient items to return to the XMPP client so that a new subscriber can populate the Live Feed area without needing to make any requests to BBC infrastructure except for binary media content. If this is not the case, then the client can make AJAX calls to the R1 HomeService to retrieve the initial set of Objects.
+
+There is concern over the memory footprint of the Browser, and we will need to look at how much of the Live and Promotional Area’s timeline is held. It may be that it is possible to hold all the content required in memory, but if not, then a means to obtaining this will need to be implemented.
+
+If the XMPP service supports the\href{http://www.google.com/url?q=http%3A%2F%2Fxmpp.org%2Fextensions%2Fxep-0059.html&sa=D&sntz=1&usg=AFQjCNHFNftwelaBrA3SHSvujhwXTNrtYA}{ XEP-0059: Result Set Management specification}, then it may be possible to do use this. Otherwise, the alternative is to query the R1 HomeService.
+
+User Story HPAC-08 mandates that published objects may need to be retracted. It is assumed that the XMPP service supports the ‘delete-items’ feature of XEP-0060 to enable persistent items to be retracted, and subscribers notified of this. The XMPP client must also support this for the item to be removed from the homepage automatically. We will use custom messages if necessary.
+
+There will additionally be XMPP messages to redirect the browser to an obituary page, and to disable and enable video playback.
+
+The Browser will pull in the page structure and can load media elements and other data, such as images, iplayer streams, and data from /music.
+
+The distribution mechanism for each piece of content will be agreed in the Foundations phase to balance timeliness with server load. The possible options are:
+
+
+
+\begin{tystrul}
+
+
+\item embed data in Object JSON data in repository; this has the benefit of not requiring any additional server calls, but then is effectively static. This approach may not work well for binary data, and will not work at all for streaming data. It is also unsuitable for chart data (as changes week to week) but may be acceptable for things like artist info imported from /music.
+
+\item pull in directly from sources, i.e., the JS Engine will query /music and add an artist bio to the page. This approach means that data is as up to date as possible, but will add an enormous load to other services.
+
+\item R1 PAL application pulls in data; This approach allows data to be cached in the PAL application so that the ‘liveness’ of data can be controlled, whilst minimizing the impact on other services.
+
+\end{tystrul}
+
+We will determine which Javascript frameworks to use during Foundations. We are familiar with Glow, JQuery, and several others, and also have extensive experience in delivering bespoke Javascript applications. Whatever the framework, we shall take care to make careful use of closures and maps, and to actively manage the memory footprint.
+
+
+\paragraph{PAL}
+\label{h.dnw0kr2shwea}
+\tystrblockfigurenocap{lshift-logo-grey-corner}The diagram above shows how the PAL sits in the architecture, particularly for browsers that do not support Flash / Javascript. The PAL can pull in information from web services in the Service Layer, such as the R1 HomeService \& Chart Publisher, or from the other BBC services if this is the strategy decided on (see discussion above).
+
+The Love Engine is included here and it is anticipated that the PAL will interrogate it on behalf of the Listener, and assembly the Suggestion Area based on the results as a fallback implementation for browsers that do not support Flash / Javascript.
+
+
+\paragraph{Service Layer}
+\label{h.3d6kekybonwo}
+\tystrblockfigurenocap{image4.png}The Service Layer will consist of Tomcat WAR applications (exact breakdown will be determined during Foundations), built on top of Spring and Hibernate. 
+
+
+\subparagraph{APIs}
+\label{h.7dsknz95uy9x}
+The Service Layer will expose a series of APIs that can be accessed either via the PAL and / or the Open gateway as necessary:
+
+
+
+\begin{tystrul}
+
+
+\item Network / Services; serve list of networks / services to use in application, with associated metadata. Will be Radio One and 1Xtra initially.
+
+\item DJs / Brands; details of DJs / Brands to use in applications. This may be available directly from another source.
+
+\item Feed API; contains the contents of the feeds, with ability to request sets of Obejcts by date / time and type to support scrolling through timelines, to serve Objects directly and process Object search requests
+
+\end{tystrul}
+
+
+\subparagraph{Feed Gatherer}
+\label{h.d008j7blrve}
+Polls the configured feeds on a per feed schedule, creates the appropriate Objects and inserts them into the appropriate timeline with a suitable publish time. This component will also insert the relevant search indexing data into the Indexing Service.
+
+The schedule will be driven using the Cron Service
+
+
+\subparagraph{Feed Publisher}
+\label{h.wgj49yb47tlh}
+The Feed Publisher checks Objects in the repository that have a schedule, and at the appropriate time, pushes them to ProcessOne via XMPP using the Java Smack library, and makes them available to the Feed API component.
+
+The schedule will be driven using the Cron Service.
+
+We would like to suggest the Enterprise Sharing Platform (ESP) as a target for distribution. This has not been costed as we are not familiar with the details of this platform, but it seems to be a good fit architecturally. It has potential for replacing at least part of the Feed API component of this project, may encourage further use of Radio 1 / 1Xtra content across the BBC, and also spread the load across the BBC infrastructure.
+
+
+\subparagraph{Object Repository}
+\label{h.jm21oluk2m0n}
+The Object Repository will be implemented using the Key Value Store. This is perfectly suited for the task as the data is non-relational, and KV Stores allows for very fast lookup using Object IDs which will be a significant use case in terms of load. Furthermore, it is designed to hold data in JSON, which is the preferred format to use throughout the system given the consumers of the data.
+
+We will use the Indexing Service (currently Solr) to provide search functionality over this data.
+
+
+\subparagraph{R1 HomeBase The HomeBase will be a MySQL database that contains all data except the Objects, for example:}
+\label{h.zhey76kms5s}
+
+
+\begin{tystrul}
+
+
+\item Network / service data
+
+\item DJ / Brand data
+
+\item Publishing data, i.e., which Objects are in which stream and when
+
+\item Audit logs 
+
+\end{tystrul}
+
+
+\subparagraph{Admin UI}
+\label{h.f33gn387y9u0}
+The Admin UI will be a JSP application hosted in the Service Layer. Changes made in the Admin UI will be propagated to the Indexing Service.
+
+
+\paragraph{Data}
+\label{h.569em37qwkz9}
+Below is our understanding of the various Objects, the sources from where their content comes, and the actions needed to prepare the data for subsequent delivery to the Listener.
+
+
+\begin{tystrtable}{8}
+
+\begin{tystrtabular}{p{0.1618\unpaddedwidth-\nestedcolsep}p{0.1635\unpaddedwidth-\nestedcolsep}p{0.2372\unpaddedwidth-\nestedcolsep}p{0.4375\unpaddedwidth-\nestedcolsep}}
+\toprule
+{\bf{}Object} & {\bf{}Source} & {\bf{}Access} & {\bf{}Assembly Actions}\\
+Episode & ION Feeds & REST API & 1. Download episode data in JSON format2. Insert new Episode into Repo
+
+3. Update existing Episode Objects in Repos
+
+
+\\
+Image & Admin system & - & 1. Image binary data stored on downloads server (assumed Forge has easily accessible suitable durable storage)2. Store metadata in Object Repo
+
+3. On request, serve images via ImageChef for scaling and caching
+
+\\
+Gallery & IPS Photo & HTTP GET & 1. Download JSON serialisation of gallery from IPS Photo Tool2. Store in Object Repo
+
+\\
+Track & VCS playout system & Unknown, assumed HTTP POST for costing, could interact with message queue directly but may be more involved & 1. Receive track data, e.g., MBz Artist name, Title, start time, duration etc.2. Look up track information from Chart Publisher
+
+3. Look up packshot and snippet detail from the Chart Tool
+
+4. Pull in biography from /music if available
+
+5. Insert all details into Object Repo
+
+\\
+Video & ION feeds \& /programmes & REST API & 1. Receive metadata in JSON format2. Insert into Obect Repo
+
+\\
+Audio (clips) & ION feeds \& /programmes	 & REST API & 1. Receive metadata in JSON format2. Insert into Obect Repo
+
+\\
+Audio (chapters) & ION feeds \& /programmes & REST API & 1. Receive metadata in JSON format2. Insert into Obect Repo
+
+\\
+Blog Post & /blogs & HTTP Pull & 1. Receive metadata in XML format2. Convert to JSON
+
+3. Insert into Obect Repo
+
+\\
+Visual promo 	 & Admin system & - & 1. Image binary data stored on downloads server 2. Store rest of data in Object Repo
+
+3. On request, serve images via ImageChef for scaling and caching
+
+\\
+SMS / MMS & WIN messaging console & Unknown, assuming HTTP Pull for costing & 1. Receive metadata in XML format2. Convert to JSON
+
+3. Insert into Obect Repo
+
+\\
+Tweet & Twitter & HTTP Pull & This will require the new admin system to upload an image.\\
+Facebook Status Update & Facebook & HTTP Pull & Assume public pages only\\
+Studio message & Admin system & - & 1. Receive message via web form2. Create Object and insert into Repo
+
+3. Producer can view list of messages by brand, and publish approved messages accordingly. This workflow would be significantly enhanced by using WebSockets to maintain constant updates.
+
+\\
+Network message & Real time tool & Unknown, assuming HTTP Pull for costing & 1. Receive metadata in XML format2. Convert to JSON
+
+3. Insert into Object Repo
+
+\\
+DJs/Brands & iPlayer favourites
+
+ & HTTP Pull & 1. Insert into service R1 HomeBase\\
+Newsbeat Story & News CPS & Unknown, assuming HTTP Pull for costing & 1. Receive metadata in XML format2. Convert to JSON
+
+3. Insert into Obect Repo
+
+\\
+\bottomrule
+
+\end{tystrtabular}
+
+
+\end{tystrtable}
+Object data will be JSON format throughout. Given that the BBC extensively uses JSON for data already, we will try to stick to existing formats by splitting out homepage meta-data from the content, for example:
+
+\texttt{\{}
+
+\texttt{ “metadata”:}
+
+\texttt{ {[}}
+
+\texttt{ \{}
+
+\texttt{ “id”: “bnd81g37d61f49fgn581”}
+
+\texttt{ “objectType”: “gallery”,}
+
+\texttt{ “networkId”: “radio1”,}
+
+\texttt{ “published”: “2010-12-13T18:30:02Z”,}
+
+\texttt{ “created”: “2010-12-12T18:00:06Z”,}
+
+\texttt{ \}}
+
+\texttt{ {]},}
+
+\texttt{ “content”:}
+
+\texttt{ {[}}
+
+\texttt{ \{}
+
+\texttt{ "gallery": \{}
+
+\texttt{	 "id": "5532",}
+
+\texttt{	 "brand": "chrismoyles",}
+
+\texttt{	 "brand\_pid": "b006wkqb",}
+
+\texttt{	 "network": "radio1",}
+
+\texttt{	 "title": "Chris Moyles Guests 2010",}
+
+\texttt{	 "description": "See all the big names who have popped into the studio this year",}
+
+\texttt{	 "size": "43",}
+
+\texttt{	 "photos": {[} 	 }
+
+\texttt{ 	 \{}
+
+\texttt{ 	 ...}
+
+\texttt{ 	\},}
+
+\texttt{ ...}
+
+\texttt{ \}}
+
+\texttt{ {]}}
+
+\texttt{\}}
+
+
+\subsubsection{Access Control}
+\label{h.svdfxswioesl}
+The Admin UI and APIs will use an X509 certificate-based security model following BBC Platform standards. Access can be granted by user, or by operational group based on certificate details.
+
+
+\subsubsection{Caching}
+\label{h.6tpowrdltylo}
+We will use a variety of caching techniques to delivery this application. We are unable to cache the whole of the page due to the use of BBC ID so we will make use of Edge Side Includes in Varnish to assembly fragments into a single page where possible. This will prevent the request even reaching the PAL for many parts of the page.
+
+Personalised fragments may still be able to be cached in this way by including the user ID in the request path. We will look into the feasibility of this during the Foundations phase once we know what the personalisation requirements are.
+
+For PAL fragments / pages not assembled in this way, we will use caching headers to force caching at the ZXTM layer. 
+
+Where the PAL pulls information in from other services, we shall use the memcache KV Store to cache the results for a suitable amount of time. This may be unnecessary for some services where results are already cached in the ZXTMs between the PAL and the Service Layer, which is one of the things we will be doing for our Service Layer components. Firstly, we will set headers to force the ZXTMs in front of the service to cache all responses for a set amount of time. This stops the request even hitting the service layer so the duration will need to be configured on a per-API basis; slow changing data such as Networks can have a long cache time, fast changing data such as the Live Feed index will have a short one.
+
+Secondly, we will use ETags to do conditional checking on requests in the service layer. The request details will be checked with the KV store to see whether the ETag represents the latest version of an entity. If so, a 304 response is returned without any data layer calls being necessary. If the data has been updated, the latest version is returned to the client. If the data is not present in the KV store, then it is retrieved from the data layer.
+
+Note that updates to existing entities will cause the relevant cache keys to be invalidated so updates are propagated without any further delay on top of the cache duration.
+
+The above strategy will work for requests both from the PAL and the Open Gateway.
+
+Responses from the Admin pages will not be cached as it is imperative that the data is as up to date as possible, and the comparative load from Producers is negligible compared to HomeService. However, the Admin pages will be cache aware, and will invalidate appropriate parts of the KV store when data is updated.
+
+Finally, all of the above will be reviewed during Foundations to ensure that we have struck the right balance between server load and liveness, and that the cache times are appropriate once the whole request path is taken into consideration.
+
+
+\subsubsection{Monitoring and Logging}
+\label{h.d6ie97pxf3df}
+Appropriate monitoring and logging will be implemented in both the PAL and the Service Layer. We will define the relevant KPIs and thresholds in consultation with EPIC during the Foundations Phase. These will at a minimum include:
+
+
+
+\begin{tystrul}
+
+
+\item failed requests, broken down by response type
+
+\item timeouts
+
+\item 4xx responses given out by the Service Layer APIs, broken down by common types
+
+\item exceptions
+
+\item request rate
+
+\item data layer connection issues
+
+\end{tystrul}
+
+The details of this will be included in the Run Book.
+
+All exceptions will be logged with stack traces, as will all negative events that are monitored. We will also log positive events such as successful feed loads to help with diagnosis if problems occur.
+
+Additional information may be logged to transient “Heisenberg” logs, such as request IP and debug information.
+
+
+\subsubsection{Mock Read Only APIs}
+\label{h.olg6wym6a7ao}
+In order to facilitate parallel development, we plan to deploy mock services for the APIs as early in the project as possible. These will be the simplest thing we can do to simulate the read only aspects of the API, and will contain a minimum set of data. These mock services will be:
+
+
+
+\begin{tystrul}
+
+
+\item Networks / services API
+
+\item DJs / brands API
+
+\item Feed API
+
+\item Feed Publisher (XMPP only)
+
+\end{tystrul}
+
+Taking the Networks / Services API as an example, the mock implementation may simply be a Tomcat app that reads static example JSON files from disk and returns them. However, this will be sufficient for the PAL and Javascript developers to progress without the full Service Layer being available.
+
+
+\section{Delivery plan}
+\label{h.1gangctmbqrv}
+
+\begin{tystrtable}{8}
+
+\begin{tystrtabular}{p{0.2147\unpaddedwidth-\nestedcolsep}p{0.5000\unpaddedwidth-\nestedcolsep}p{0.1202\unpaddedwidth-\nestedcolsep}p{0.2035\unpaddedwidth-\nestedcolsep}}
+\toprule
+{\bf{}Phase} & {\bf{}Activity} & {\bf{}Elapsed Time} & {\bf{}Notes}\\
+Foundations 0. & 
+
+\begin{tystrul}
+
+
+\item API specs
+
+\item Test Strategy and Plan
+
+\item Tech Design \& Architecture
+
+\item Admin section UX \& wireframes
+
+\item Database design
+
+\end{tystrul}
+
+ & 4 weeks & \\
+Timebox 1. & 
+
+\begin{tystrul}
+
+
+\item Mock read-only Service layer API interfaces
+
+\item POM \& Framework setup
+
+\end{tystrul}
+
+WHAT’S AVAILABLE AT THIS POINT?
+
+ & 2 weeks & To enable parallel development of UI and Service layer\\
+Timebox 2. & 
+
+\begin{tystrul}
+
+
+\item Databases
+
+\begin{tystrul}
+
+
+\item HomeBase
+
+\item Object repository
+
+\end{tystrul}
+
+
+
+\item Access and integration with durable filesystem
+
+\end{tystrul}
+
+ & 2 weeks & \\
+Timebox 3. & 
+
+\begin{tystrul}
+
+
+\item Feeds 
+
+\item Configure ImageChef \& recipies
+
+\item Solr integration and index definition
+
+\end{tystrul}
+
+ &  & To get test data in system early\\
+Timebox 4. & 
+
+\begin{tystrul}
+
+
+\item Manual object creation and editing
+
+\item Configure cron service
+
+\item Cache implementation and testing
+
+\end{tystrul}
+
+ &  & \\
+Timebox 5. & 
+
+\begin{tystrul}
+
+
+\item Publishing
+
+\item Other APIs
+
+\end{tystrul}
+
+ &  & \\
+Timebox 6. & 
+
+\begin{tystrul}
+
+
+\item Bookmarklets
+
+\item Authentication \& authorisation
+
+\item Monitoring
+
+\item Logging
+
+\item Audit trail
+
+\item Unit testing \& coverage report
+
+\item Automated Admin UI web testing
+
+\end{tystrul}
+
+ &  & \\
+Timebox 7.  & 
+
+\begin{tystrul}
+
+
+\item Load testing support
+
+\item Acceptance testing support
+
+\item Admin UI design compliance check (assuming BBC Desktop only)
+
+\item Handover and final documentation
+
+\end{tystrul}
+
+ &  & \\
+ &  &  & \\
+\bottomrule
+
+\end{tystrtabular}
+
+
+\end{tystrtable}
+***We need to parallelise the UI work phases over the Service layer
+
+KF: A mention of “Confluence” use (along with WebDriver etc.) to hit their “how is UAT managed?” question.
+
+
+
+\includetnc
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+

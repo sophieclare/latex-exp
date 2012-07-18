@@ -1,0 +1,194 @@
+% This is a common style sheet
+
+\ProvidesPackage{lshift}
+
+%---------------------------------------------------------------------------
+% Define some corporate branding colors, probably should patent them as well
+\usepackage[usenames]{color}
+\usepackage{colortbl}
+\definecolor{FrontPageGrey}{rgb}{0.7,0.7,0.7}
+\definecolor{LShiftBlue}{rgb}{0,0.6784,0.9373}
+\definecolor{SubtitleGrey}{rgb}{0.3,0.3,0.3}
+
+%---------------------------------------------------------------------------
+% Include some standard stuff
+\usepackage{typesetr}
+\usepackage{graphicx}
+\usepackage{minitoc}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black}
+\usepackage[all]{hypcap}
+\usepackage{multirow}
+\usepackage[absolute]{textpos}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{pdflscape}
+\usepackage{amsmath,amsthm}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[figureright]{rotating}
+\usepackage{arydshln}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\usepackage{marginnote}
+
+%---------------------------------------------------------------------------
+% Define some layout conventions
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\fancyheadoffset[LE,RO]{0pt}
+
+\renewenvironment{tystrtabular}{\longtable}{\endlongtable}
+%---------------------------------------------------------------------------
+% Set up the page layout
+\newcommand{\subsubparagraph}[1]{\textsc{#1}}
+
+\setlength{\hoffset}{-20pt}
+\setlength{\voffset}{-30pt}
+
+\setlength{\topmargin}{4cm}
+\setlength{\headsep}{15pt}
+
+\setlength{\headheight}{15pt}
+\setlength{\headsep}{45pt}
+
+\setlength{\parskip}{0.7em}
+\setlength{\parindent}{0em}
+
+\setlength{\marginparwidth}{3.9cm}
+\setlength{\marginparsep}{0.7cm}
+
+%get rid of headheight warning
+\setlength{\headheight}{47pt}
+
+% \setlength{\oddsidemargin}{2.5cm}
+% \setlength{\evensidemargin}{2.5cm}
+% \setlength{\columnsep}{30pt}
+
+\newcommand{\bottommarginsize}{1.5cm}
+\newcommand{\termcondleft}{2cm}
+\newcommand{\leftmarginsize}{6cm}
+\newcommand{\rightmarginsize}{0.5cm}
+
+% Defining the left margin with logo for all pages including the title page
+\usepackage[left=\leftmarginsize,
+            right=\rightmarginsize,
+            bottom=\bottommarginsize,showframe]{geometry}
+\lhead{
+  \begin{textblock}{1}(15,15)
+    \includegraphics[height=1cm,keepaspectratio]{lshift-logo-and-text-rgb}
+  \end{textblock}
+}
+%gets rid of default page no.
+\cfoot{}
+
+%creates and set up confidential value
+\newif\ifconfidential
+\confidentialtrue
+%command that prints confidential mark
+\newcommand{\confidentialmark}{
+  \ifconfidential
+    \textcolor{FrontPageGrey}{{[}CONFIDENTIAL{]}}\\
+  \fi
+}
+
+%should we include T&C?
+\newif\iftnc
+\tnctrue
+%command that includes the terms and conditions
+\newcommand{\includetnc}{
+    \whendefined{\tystrtnc}{
+        \IfStrEq{\tystrtnc}{no}
+        {\tncfalse}{}
+    }
+    \iftnc
+        \include {LShift-terms-and-conds}
+    \fi
+}
+%---------------------------------------------------------------------------
+% Less agressive hyphens
+\hyphenpenalty=800
+
+%---------------------------------------------------------------------------
+% Put more floats on each page
+
+%two column float page must be 90% full
+\renewcommand\dblfloatpagefraction{.90}
+%two column top float can cover up to 80% of page
+\renewcommand\dbltopfraction{.80}
+%float page must be 90% full
+\renewcommand\floatpagefraction{.90}
+%top float can cover up to 80% of page
+\renewcommand\topfraction{.80}
+%bottom float can cover up to 80% of page
+\renewcommand\bottomfraction{.80}
+%at least 10% of a normal page must contain text
+\renewcommand\textfraction{.1}
+
+%separation between floats and text
+\setlength\dbltextfloatsep{9pt plus 5pt minus 3pt }
+%separation between two column floats and text
+\setlength\textfloatsep{10pt plus 4pt minus 3pt}
+
+%---------------------------------------------------------------------------
+% list styling
+%---------------------------------------------------------------------------
+
+% allow list-nesting up to 9 levels (which is what google docs and openoffice allow)
+\setlistdepth{9}
+
+% tweaked word-style enumerate; latex default in comments at EOL
+\newlist{ol}{enumerate}{9}
+\setlist[ol,1]{label={\color{LShiftBlue}{\arabic*}}} %\arabic*.
+\setlist[ol,3]{label=\alph*)} % (\alph*)
+\setlist[ol,2]{label=\roman*.} % \roman*.
+\setlist[ol,4]{label=\arabic*.} %\Alph*.
+\setlist[ol,5]{label=\alph*)}
+\setlist[ol,6]{label=\roman*.}
+\setlist[ol,7]{label=\arabic*.}
+\setlist[ol,8]{label=\alph*)}
+\setlist[ol,9]{label=\roman*)}
+
+\let\tystrol\ol
+
+% tweaked word-style itemize; latex default in comments at EOL
+\newlist{ul}{itemize}{9}
+\setlist[ul,1]{label={\color{LShiftBlue}{\textbullet}}} % \textbullet
+\setlist[ul,2]{label={$\circ$}} % \normalfont\bfseries \textendash
+% another alternative:{{\tiny\raisebox{0.15em}{$\blacksquare$}}}
+\setlist[ul,3]{label=\tiny\raisebox{0.2em}{\rule{.5em}{.5em}}} %\textasteriskcentered
+\setlist[ul,4]{label={$\bullet$}} %\textperiodcentered
+\setlist[ul,5]{label={$\circ$}}
+\setlist[ul,6]{label={\tiny\raisebox{0.2em}{\rule{.5em}{.5em}}}}
+\setlist[ul,7]{label={\color{LShiftBlue}{\textbullet}}}
+\setlist[ul,8]{label={$\circ$}}
+\setlist[ul,9]{label={\tiny\raisebox{0.2em}{\rule{.5em}{.5em}}}}
+
+\let\tystrul\ul
+
+% Sets the list style
+\setlist[1]{leftmargin=0pt}
+\setlist{itemindent=0pt,partopsep=0pt,itemsep=1pt,parsep=0pt}
+\setlist[itemize]{label={\color{LShiftBlue}{$\bullet$}}}
+
+%---------------------------------------------------------------------------
+% Use a particular font
+\usepackage{fontspec}
+\setsansfont{Agfa Rotis Sans Serif Light}
+\setromanfont{Agfa Rotis Sans Serif}
+% \setromanfont{Cambria}
+%\setromanfont{Gentium Plus}
+\newfontfamily\rotis[Scale=1.2,Color=00A5D9]{Agfa Rotis Sans Serif}
+\addtokomafont{disposition}{\rotis}
+\setcounter{secnumdepth}{0}
+%fix position of margins
+\reversemarginpar
+
+%---------------------------------------------------------------------------
+%table of content editing
+
+%make fancyheader in table of contents
+\addtocontents{toc}{\protect\thispagestyle{fancy}}
+%---------------------------------------------------------------------------

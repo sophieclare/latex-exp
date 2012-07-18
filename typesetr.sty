@@ -1,0 +1,107 @@
+% Common style sheet for all typesetr templates
+
+\ProvidesPackage{typesetr}
+
+%---------------------------------------------------------------------------
+\usepackage{calc}
+\usepackage{ifpdf}
+\usepackage{ifthen}
+\usepackage{xstring}
+\usepackage{needspace}
+\usepackage{graphicx}
+\usepackage{booktabs} %toprule
+
+\usepackage{datetime}
+\newdateformat{thisyear}{\THEYEAR}
+
+%---------------------------------------------------------------------------
+%keep track of table nesting
+\newcounter{tablenesting}
+\setcounter{tablenesting}{0}
+
+\newlength{\unpaddedwidth} % used for table column width
+\setlength{\unpaddedwidth}{0.5\textwidth-0.5\paperwidth}
+\newlength{\nestedcolsep} % used for table column width
+
+\newcommand{\setunpaddedwidth}[1]{
+  \ifthenelse{\value{tablenesting}=0}
+    {\setlength{\unpaddedwidth}{\textwidth-#1\tabcolsep}}{}
+}
+
+
+%---------------------------------------------------------------------------
+% Helpers: image scaling
+\def\scalewifneeded{%
+  \ifdim\Gin@nat@width>\marginparwidth
+    \marginparwidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\def\sndscaleifneeded{%
+  \ifdim\Gin@nat@width>\textwidth
+    \textwidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+% Helpers: margin figures
+%from koma-script/scrreprt.cls
+\providecommand\marginline[1]{%
+  \marginpar[\raggedleft{#1}]{\raggedright #1}%
+}
+
+% Helpers: metadata
+%check arg 1 and if defined does item 2
+\newcommand{\whendefined}[2]{%
+  \ifdefined#1%
+      #2%
+  \fi%
+}%
+
+\newcommand{\ifdefinedelse}[3]{%
+  \ifdefined#1%
+      #2%
+  \else%
+      #3%
+  \fi%
+}%
+
+%---------------------------------------------------------------------------
+% default implementations of figures
+\newcommand{\tystrmarginfigure}[1]{
+  \marginline{
+    \centering
+    \includegraphics[width=\scalewifneeded,keepaspectratio]{#1}
+  }
+}
+
+% first arg for caption, 2nd for path to file
+\newcommand{\tystrblockfigure}[2]{
+  \begin{figure}[h]
+    \centerline{
+      \includegraphics[width=\sndscaleifneeded,keepaspectratio]{#2}
+    }
+    \caption{#1}
+  \end{figure}
+}
+
+\newcommand{\tystrblockfigurenocap}[1]{
+  \centerline{
+    \includegraphics[width=\sndscaleifneeded,keepaspectratio]{#1}
+  }
+}
+
+% default implementation of lists
+\newenvironment{tystrul}{\itemize}{\enditemize}
+\newenvironment{tystrol}{\enumerate}{\endenumerate}
+% default implementation of table contents
+\newenvironment{tystrtabular}{\tabular}{\endtabular}
+% table wrapper
+\newenvironment{tystrtable}[1] % takes number of cols as arg
+  {\setunpaddedwidth{#1}
+   \setlength{\nestedcolsep}{2\value{tablenesting}}
+   \setlength{\nestedcolsep}{\nestedcolsep*\tabcolsep}
+   \setcounter{tablenesting}{\value{tablenesting}+1}
+   \needspace{6\baselineskip}}
+  {\setcounter{tablenesting}{\value{tablenesting}-1}}

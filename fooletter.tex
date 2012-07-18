@@ -1,0 +1,110 @@
+% -*- TeX-engine: xetex -*-
+\documentclass[10pt, a4paper, parskip=half,
+               enlargefirstpage, pagenumber=no]{scrlttr2}
+
+\usepackage[english]{babel}
+\usepackage[absolute]{textpos}
+\usepackage{typesetr}
+
+%hack to accomodate headings (but no one should ever put some in a letter)
+\providecommand{\section}[1]{%
+\par%
+#1%
+}
+\providecommand{\subsection}[1]{%
+\par%
+#1%
+}
+\providecommand{\subsubsection}[1]{%
+\par%
+#1%
+}
+\providecommand{\paragraph}[1]{%
+\par%
+#1%
+}
+\providecommand{\subparagraph}[1]{%
+\par%
+#1%
+}
+
+%use floating figures for everyting - otherwise signature will break
+\let\tystrmarginfigure\tystrblockfigurenocap
+
+%no footer on first page
+\makeatletter
+\@setplength{firstfootvpos}{\paperheight}
+
+\renewcommand*{\raggedsignature}{\raggedright}
+\makeatother
+
+\begin{document}
+\newcommand{\tystryourref}{YOUR2233}
+\newcommand{\tystrsubtitle}{}
+\newcommand{\tystrfromfax}{+44 (0)20 7729 7005}
+\newcommand{\tystrtitle}{Untitled Document}
+\newcommand{\tystrfromname}{Julian Burns}
+\newcommand{\tystrauthor}{LShift}
+\newcommand{\tystrfromphone}{+44 (0)20 7729 7060}
+\newcommand{\tystrfromaddress}{LShift Ltd\\  Hoxton Point\\  6 Rufus Street\\  London\\  N1 6PE}
+\newcommand{\tystrclient}{LShift}
+\newcommand{\tystrproject}{internal}
+\newcommand{\tystraffiliation}{LShift}
+\newcommand{\tystrversion}{0.0}
+\newcommand{\tystrmyref}{FER66689}
+\newcommand{\tystrsignature}{\tystrmarginfigure{lshift-logo-blue-rgb}}
+\newcommand{\tystrdate}{2012-6-12}
+\newcommand{\tystrfromemail}{julian@lshift.net}
+\newcommand{\tystrrecipientaddress}{Recipients Address\\  Somewhere Out There\\  Earth}
+\newcommand{\tystrrecipient}{The Recipient}
+\newcommand{\tystrclosing}{Yours faithfully,}
+\newcommand{\tystropening}{Dear Sir/Madam}
+
+% Small logo - position is hardcoded, should figure out nicer way
+\begin{textblock*}{3cm}(16\TPHorizModule-3cm-2cm, \useplength{firstheadvpos})
+\noindent \includegraphics[width=3cm,height=3cm]{lshift-logo-blue-rgb}
+\end{textblock*}
+
+
+\whendefined{\tystrsubject}{\setkomavar{subject}{\tystrsubject}}
+
+\whendefined{\tystrfromname}{\setkomavar{fromname}{\tystrfromname}}
+\whendefined{\tystrfromaddress}{\setkomavar{fromaddress}{\tystrfromaddress}}
+\whendefined{\tystrfromphone}{\setkomavar{fromphone}{\tystrfromphone}}
+\whendefined{\tystrfromemail}{\setkomavar{fromemail}{\tystrfromemail}}
+\whendefined{\tystrfromfax}{\setkomavar{fromfax}{\tystrfromfax}}
+\whendefined{\tystrfromurl}{\setkomavar{fromurl}{\tystrfromurl}}
+\whendefined{\tystrfrombank}{\setkomavar{frombank}{\tystrfrombank}}
+\whendefined{\tystrplace}{\setkomavar{place}{\tystrplace}}
+\whendefined{\tystrsignature}{\setkomavar{signature}{\tystrsignature}}
+
+\whendefined{\tystryourref}{\setkomavar{yourref}{\tystryourref}}
+\whendefined{\tystryourmail}{\setkomavar{yourmail}{\tystryourmail}}
+\whendefined{\tystrmyref}{\setkomavar{myref}{\tystrmyref}}
+\whendefined{\tystrdate}{\setkomavar{date}{\tystrdate}}
+
+\begin{letter}{%
+\tystrrecipient \\
+\tystrrecipientaddress
+}
+\opening{\tystropening}
+LShift recently worked with the CII to implement a system to provide a basis for CII Members to request and download a Statement of Professional Standing (SPS). The system also checks the validity of the request by accessing data from the AS400 systems and the Gap Verification system.
+
+This document covers an additional phase of work to to add a web based management reporting solution.
+
+LShift have been asked to consider a solution that will simplify the transition to SSRS (SQL Server Reporting Service) should that be required at a later stage. The proposed solution will involve extracting from the current database, applying business logic relevant to the report outputs and storing the results in a new database. This intermediate database will then be used for web-based reports now and subsequently for SSRS, if required. 
+
+Existing reports will be reworked to make use of the new database and to remove any duplication of business logic. 
+
+All reports will be accessed through the existing Customer Service website and be run manually. All reports will be web-based with an option to download to Excel if required.
+
+This filler text is here to see if text that barely fits on one page is split to more than one. The worst thing that can happen is that the second page only has the closing and signature. Unfortunately I don’t think we can reliably detect that, so it’s up to the user to adjust the content and font size so that it never happens.
+
+This filler text is here to see if text that barely fits on one page is split to more than one. The worst thing that can happen is that the second page only has the closing and signature. 
+
+
+\closing{\tystrclosing}
+\end{letter}
+
+\end{document}
+
