@@ -1,32 +1,11 @@
 % -*- TeX-engine: xetex -*-
 \documentclass[10pt, a4paper, parskip=half,
-               enlargefirstpage, pagenumber=no]{scrlttr2}
+               enlargefirstpage ]{scrlttr2}
 
 \usepackage[english]{babel}
 \usepackage[absolute]{textpos}
 \usepackage{typesetr}
 
-%hack to accomodate headings (but no one should ever put some in a letter)
-\providecommand{\section}[1]{%
-\par%
-#1%
-}
-\providecommand{\subsection}[1]{%
-\par%
-#1%
-}
-\providecommand{\subsubsection}[1]{%
-\par%
-#1%
-}
-\providecommand{\paragraph}[1]{%
-\par%
-#1%
-}
-\providecommand{\subparagraph}[1]{%
-\par%
-#1%
-}
 
 %use floating figures for everyting - otherwise signature will break
 \let\tystrmarginfigure\tystrblockfigurenocap
@@ -39,7 +18,7 @@
 \makeatother
 
 \begin{document}
-
+\pagenumbering{roman}
 \newcommand{\tystryourref}{YOUR2233}
 \newcommand{\tystrsubtitle}{}
 \newcommand{\tystrfromfax}{+44 (0)20 7729 7005}
@@ -91,6 +70,12 @@
 \opening{\tystropening}
 LShift recently worked with the CII to implement a system to provide a basis for CII Members to request and download a Statement of Professional Standing (SPS). The system also checks the validity of the request by accessing data from the AS400 systems and the Gap Verification system.
 
+This document covers an additional phase of work to to add a web based management reporting solution.
+
+LShift have been asked to consider a solution that will simplify the transition to SSRS (SQL Server Reporting Service) should that be required at a later stage. The proposed solution will involve extracting from the current database, applying business logic relevant to the report outputs and storing the results in a new database. This intermediate database will then be used for web-based reports now and subsequently for SSRS, if required. 
+This document covers an additional phase of work to to add a web based management reporting solution.
+
+LShift have been asked to consider a solution that will simplify the transition to SSRS (SQL Server Reporting Service) should that be required at a later stage. The proposed solution will involve extracting from the current database, applying business logic relevant to the report outputs and storing the results in a new database. This intermediate database will then be used for web-based reports now and subsequently for SSRS, if required. 
 This document covers an additional phase of work to to add a web based management reporting solution.
 
 LShift have been asked to consider a solution that will simplify the transition to SSRS (SQL Server Reporting Service) should that be required at a later stage. The proposed solution will involve extracting from the current database, applying business logic relevant to the report outputs and storing the results in a new database. This intermediate database will then be used for web-based reports now and subsequently for SSRS, if required. 

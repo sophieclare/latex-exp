@@ -1,17 +1,19 @@
 % -*- TeX-engine: xetex -*-
-\documentclass[12pt, a4paper, parskip=half,
-               enlargefirstpage, pagenumber=no]{scrlttr2}
+\documentclass[10pt, a4paper, parskip=half,
+               enlargefirstpage ]{scrlttr2}
 
 % Include the standard LShift package
+\usepackage[english]{babel}
+\usepackage[absolute]{textpos}
 \usepackage{lshift}
 %---------------------------------------------------------------------------
 % Renders definitions, examples and design considerations differently
-\newenvironment{definition}[1][Definition]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-\newenvironment{example}[1][Example]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-\newenvironment{design}[1][Design Consideration]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{definition}[1][Definition]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{example}[1][Example]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%\newenvironment{design}[1][Design Consideration]{\begin{trivlist}
+%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
 
 %---------------------------------------------------------------------------
 % Kick the document off
@@ -30,11 +32,11 @@
 
 % Main body
 
-\section{ Typesetr Prototype letter}
-\label{h.v0in2tf244c4}
+\newcommand{\tystrrecipientaddress}{Recipients Address\\  Somewhere Out There\\  Eart \\}
+\newcommand{\tystrrecipient}{The Recipient}
 
-\subsection{System Overview}
-\label{h.aqxdte3o5oy}
+\tystrrecipient \\
+\tystrrecipientaddress
 The architectural overview in the RFP document represents a useful decomposition of the system which we shall use to structure the subsequent Requirements and Proposed Solution sections.
 
 Pulling together so many types and sources of information into the page creates complexity and requires careful optimisation. As a result there are a number of particularly acute technical challenges upon which we will be focusing.
@@ -75,8 +77,4 @@ The Service Layer will expose a series of APIs that can be accessed either via t
 
 \end{document}
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
 
