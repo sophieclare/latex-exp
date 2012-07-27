@@ -4,10 +4,6 @@
 \setlength{\TPHorizModule}{1mm}
 \setlength{\TPVertModule}{\TPHorizModule}
 
-\whendefined{\tystrconfidential}{
-  \IfStrEq{\tystrconfidential}{no}
-  {\confidentialfalse}{}
-}
 
 % Address
 \begin{textblock}{100}(15,32)
@@ -27,7 +23,7 @@
 \end{textblock}
 \begin{textblock}{100}(15,287)
   \small \textcolor{FrontPageGrey}
-  {Copyright © LShift Ltd \thisyear\today\\
+  {Copyright © LShift Ltd \the\year\\
     Registered in England\\
     No 04040033}
 \end{textblock}
@@ -42,7 +38,7 @@
 
 \rfoot{}
 \rhead{
-  \begin{textblock}{100}(105,15)
+  \begin{textblock}{200}(105,15)
   \small
   \end{textblock}
 }
