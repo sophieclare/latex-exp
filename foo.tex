@@ -1,42 +1,112 @@
 % -*- TeX-engine: xetex -*-
-\documentclass[10pt, a4paper, parskip=half,
+\documentclass[10pt, paper=A4, parskip=full,asymTypB,
                enlargefirstpage ]{scrlttr2}
 
 % Include the standard LShift package
 \usepackage[english]{babel}
-\usepackage[absolute]{textpos}
+%\usepackage[absolute]{textpos}
 \usepackage{lshift}
-%---------------------------------------------------------------------------
-% Renders definitions, examples and design considerations differently
-%\newenvironment{definition}[1][Definition]{\begin{trivlist}
-%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-%\newenvironment{example}[1][Example]{\begin{trivlist}
-%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
-%\newenvironment{design}[1][Design Consideration]{\begin{trivlist}
-%\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+%move recipient address inline with left hand paragraph on bod
+\makeatletter
+\@setplength{toaddrvpos}{60mm}
+\@setplength{toaddrhpos}{60mm}
+
+\makeatother
+
+%use floating figures for everyting - otherwise signature will break
+\let\tystrmarginfigure\tystrblockfigurenocap
+
+
+
+\renewcommand*{\raggedsignature}{\raggedright}
+\makeatother
 
 %---------------------------------------------------------------------------
 % Kick the document off
 \begin{document}
+\rfoot{\textcolor{LShiftBlue}{Technology from back to front}}
+% Directives for the textpos package with absolute positioning
+\textblockorigin{0mm}{0mm}
+\setlength{\TPHorizModule}{1mm}
+\setlength{\TPVertModule}{\TPHorizModule}
 
-% Variables for the title page
-\newcommand{\tystrsubtitle}{}
-\newcommand{\tystrtitle}{Untitled Document}
-\newcommand{\tystrauthor}{LShift}
-\newcommand{\tystrclient}{LShift}
-\newcommand{\tystrproject}{internal}
-\newcommand{\tystraffiliation}{LShift blah blah}
-\newcommand{\tystrversion}{0.0}
-\newcommand{\tystrdate}{2012-07-12}
-\include{lshift_titlepage}
+
+ \begin{textblock}{1}(18,15)
+    \includegraphics[height=0.9cm,keepaspectratio]{lshift-logo-and-text-rgb}
+  \end{textblock}
+
+% Small logo
+\begin{textblock}{1}(150,15)
+  \includegraphics[width=5.8cm,height=5.8cm]{lshift-logo-grey-corner}
+\end{textblock}
+
+% Address
+\begin{textblock}{100}(18,32)
+  \begin{small}
+    {\color{FrontPageGrey}
+      \noindent1st Floor Office\\
+      Hoxton Point\\
+      6 Rufus Street\\
+      London, N1 6PE\\
+
+      \noindent T: +44 (0) 20 7729 7060\\
+      F: +44 (0) 20 7729 7005\\
+      enquiries@lshift.net\\
+      www.lshift.net\\
+    }
+  \end{small}
+\end{textblock}
+\begin{textblock}{100}(15,287)
+  \small \textcolor{FrontPageGrey}
+  {Copyright © LShift Ltd \the\year\\
+    Registered in England\\
+    No 04040033}
+\end{textblock}
+
+
+
+
+\rfoot{}
+\rhead{
+  \begin{textblock}{200}(105,15)
+  \small
+  \end{textblock}
+}
+
+% newpage
+% start printining page no.
+\rfoot{\textcolor{LShiftBlue}{Page\ \thepage\ of \pageref*{LastPage}\\}}
+
+
 
 % Main body
-
+\newcommand{\tystrfromphone}{+44 (0)20 7729 7060}
+\newcommand{\tystrfromaddress}{LShift Ltd\\  Hoxton Point\\  6 Rufus Street\\  London\\  N1 6PE}
+\newcommand{\tystrclient}{LShift}
+\newcommand{\tystrproject}{internal}
+\newcommand{\tystrsubjet}{This is about a subject}
+\newcommand{\tystraffiliation}{LShift}
+\newcommand{\tystrversion}{0.0}
+\newcommand{\tystrmyref}{FER66689}
+\newcommand{\tystrsignature}{\tystrmarginfigure{lshift-logo-blue-rgb}}
+\newcommand{\tystrdate}{2012-6-12}
 \newcommand{\tystrrecipientaddress}{Recipients Address\\  Somewhere Out There\\  Eart \\}
 \newcommand{\tystrrecipient}{The Recipient}
+\newcommand{\tystrclosing}{Yours faithfully,}
+\newcommand{\tystropening}{Dear Sir/Madam}
 
+\setkomavar{subject}{This is about a subject} 
+
+
+\begin{letter}{%
 \tystrrecipient \\
 \tystrrecipientaddress
+}
+\opening{\tystropening}
+
+Reference: How do we acheive this? 
+
 The architectural overview in the RFP document represents a useful decomposition of the system which we shall use to structure the subsequent Requirements and Proposed Solution sections.
 
 Pulling together so many types and sources of information into the page creates complexity and requires careful optimisation. As a result there are a number of particularly acute technical challenges upon which we will be focusing.
@@ -45,9 +115,10 @@ The Service Layer will expose a series of APIs that can be accessed either via t
 
 Pulling together so many types and sources of information into the page creates complexity and requires careful optimisation. As a result there are a number of particularly acute technical challenges upon which we will be focusing.
 
-The Service Layer will expose a series of APIs that can be accessed either via the PAL and / or the Open gateway as necessary:Pulling together so many types and sources of information into the page creates complexity and requires careful optimisation. As a result there are a number of particularly acute technical challenges upon which we will be focusing.
-
-The Service Layer will expose a series of APIs that can be accessed either via the PAL and / or the Open gateway as necessary:Pulling together so many types and sources of information into the page creates complexity and requires careful optimisation. As a result there are a number of particularly acute technical challenges upon which we will be focusing.
+ 
+I am writing to you on behalf of the Wikipedia project (http://www.wikipedia.org/),
+an endeavour to build a fully-fledged multilingual encyclopaedia in an entirely
+open manner, to ask for permission to use your copyrighted material.
 
 The Service Layer will expose a series of APIs that can be accessed either via the PAL and / or the Open gateway as necessary:Pulling together so many types and sources of information into the page creates complexity and requires careful optimisation. As a result there are a number of particularly acute technical challenges upon which we will be focusing.
 
@@ -75,6 +146,9 @@ The Service Layer will expose a series of APIs that can be accessed either via t
 
 The Service Layer will expose a series of APIs that can be accessed either via the PAL and / or the Open gateway as necessary:
 
+\closing{\tystrclosing}
+\ps{P.S. You can find the full text of GFDL license at.}
+\end{letter}
 \end{document}
 
 

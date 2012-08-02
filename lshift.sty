@@ -46,10 +46,10 @@
 \newcommand{\subsubparagraph}[1]{\textsc{#1}}
 
 \setlength{\hoffset}{-0.8cm}
-\setlength{\voffset}{-0.8cm}
+\setlength{\voffset}{-0.5cm}
 
 %sc: these two don't seem to do anything 
-\setlength{\topmargin}{-4cm}
+\setlength{\topmargin}{0cm}
 \setlength{\headsep}{55pt}
 
 \setlength{\headheight}{5pt}
@@ -62,7 +62,7 @@
 \setlength{\marginparsep}{0.7cm}
 
 %get rid of headheight warning
-\setlength{\headheight}{47pt}
+%\setlength{\headheight}{47pt}
 
 % \setlength{\oddsidemargin}{2.5cm}
 % \setlength{\evensidemargin}{2.5cm}
@@ -71,15 +71,15 @@
 \newcommand{\bottommarginsize}{1.5cm}
 \newcommand{\termcondleft}{2cm}
 \newcommand{\leftmarginsize}{6cm}
-\newcommand{\rightmarginsize}{-0.2cm}
+\newcommand{\rightmarginsize}{0.2cm}
 
 % Defining the left margin with logo for all pages including the title page
-\usepackage[left=\leftmarginsize,
+\usepackage[showframe,left=\leftmarginsize,
             right=\rightmarginsize,
-            bottom=\bottommarginsize,showframe]{geometry}
+            bottom=\bottommarginsize]{geometry}
 \lhead{
-  \begin{textblock}{1}(15,15)
-    \includegraphics[height=1cm,keepaspectratio]{lshift-logo-and-text-rgb}
+ \begin{textblock}{1}(18,15)
+    \includegraphics[height=0.9cm,keepaspectratio]{lshift-logo-and-text-rgb}
   \end{textblock}
 }
 %gets rid of default page no.
