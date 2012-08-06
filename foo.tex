@@ -79,25 +79,24 @@
 % start printining page no.
 \rfoot{\textcolor{LShiftBlue}{Page\ \thepage\ of \pageref*{LastPage}\\}}
 
-
-
-% Main body
-\newcommand{\tystrfromphone}{+44 (0)20 7729 7060}
-\newcommand{\tystrfromaddress}{LShift Ltd\\  Hoxton Point\\  6 Rufus Street\\  London\\  N1 6PE}
-\newcommand{\tystrclient}{LShift}
-\newcommand{\tystrproject}{internal}
-\newcommand{\tystrsubjet}{This is about a subject}
-\newcommand{\tystraffiliation}{LShift}
-\newcommand{\tystrversion}{0.0}
-\newcommand{\tystrmyref}{FER66689}
-\newcommand{\tystrsignature}{\tystrmarginfigure{lshift-logo-blue-rgb}}
-\newcommand{\tystrdate}{2012-6-12}
 \newcommand{\tystrrecipientaddress}{Recipients Address\\  Somewhere Out There\\  Eart \\}
 \newcommand{\tystrrecipient}{The Recipient}
 \newcommand{\tystrclosing}{Yours faithfully,}
 \newcommand{\tystropening}{Dear Sir/Madam}
 
-\setkomavar{subject}{This is about a subject} 
+
+\whendefined{\tystrsubject}{\setkomavar{subject}{\tystrsubject}}
+\whendefined{\tystrfromname}{\setkomavar{fromname}{\tystrfromname}}
+\whendefined{\tystrfromaddress}{\setkomavar{fromaddress}{\tystrfromaddress}}
+\whendefined{\tystrfromphone}{\setkomavar{fromphone}{\tystrfromphone}}
+\whendefined{\tystrfromemail}{\setkomavar{fromemail}{\tystrfromemail}}
+\whendefined{\tystrfromfax}{\setkomavar{fromfax}{\tystrfromfax}}
+\whendefined{\tystrfromurl}{\setkomavar{fromurl}{\tystrfromurl}}
+\whendefined{\tystrfrombank}{\setkomavar{frombank}{\tystrfrombank}}
+\whendefined{\tystrplace}{\setkomavar{place}{\tystrplace}}
+\whendefined{\tystrsignature}{\setkomavar{signature}{\tystrsignature}}
+
+
 
 
 \begin{letter}{%
